@@ -74,7 +74,7 @@ python tools/train.py --config-file configs/huasheng3d/insseg-pointgroup-v3m1-0-
 python tools/train.py --config-file configs/huasheng3d/insseg-pointgroup-v3m1-0-pt3_2.py --options save_path="exp/huasheng3d/insseg-pointgroup-v3m1-0-pt3_2_0824"
 ```
 
-Our model weight is here: xxx
+Our model weight is here: https://www.kaggle.com/datasets/yangxin6/peanut-point-cloud-segmentation-model-weights
 
 ### Test
 
