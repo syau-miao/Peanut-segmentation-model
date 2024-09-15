@@ -56,6 +56,7 @@ pip install flash-attn --no-build-isolation
 
 
 ### Dataset
+Our model data is here: https://www.kaggle.com/datasets/yangxin6/peanut-point-cloud/
 
 training and validation datasets into the `data/huasheng3d/` folder, and modify the corresponding `configs/*` file
 
@@ -91,10 +92,11 @@ python tools/test.py --config-file configs/huasheng3d/insseg-pointgroup-v3m1-0-p
 
 
 ## 3D Phenotype Measurement
-
+Our Split result data is here: https://www.kaggle.com/datasets/yangxin6/peanut-point-cloud-segmentation-results
 ```bash
 #For label merging and phenotype acquisition of segmented data.
 #Change the address in data_root when it is used.
+
 
 #Environmental installation
 conda install scipy,shapely,open3d,matplotlib,openpyxl,scikit-learn,numpy
