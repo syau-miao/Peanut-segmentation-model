@@ -104,7 +104,7 @@ python tools/test.py --config-file configs/huasheng3d/insseg-pointgroup-v3m1-0-p
 - Tag_merge :It is used for merging semantic and instance tags and data.
 
 ```bash
-#
+#11111
 #
 python src/LA.py 
 ```
