@@ -4,6 +4,7 @@ import numpy as np
 import os
 import math
 import open3d as o3d
+import openpyxl
 
 def P_HW(data):
     '''
@@ -81,31 +82,28 @@ def calculate_centroid(points):
     centroid = np.mean(points, axis=0)
     return centroid
 
-name=['ID']
-leng=['株高']
-width=['真实株幅']
-data_root="F:\/240823_n40_data_train_val_test_result\普通手动真值"
-for item in os.listdir(data_root):
-    name.append(item)
-    xyzl=np.loadtxt(os.path.join(data_root,item))
-    h,w=P_HW(xyzl)
-    print(h,w)
-    width.append(w)
-    leng.append(h)
+def main():
+    name=['ID']
+    leng=['株高']
+    width=['真实株幅']
+    data_root="F:\/240823_n40_data_train_val_test_result\普通手动真值"
+    for item in os.listdir(data_root):
+        name.append(item)
+        xyzl=np.loadtxt(os.path.join(data_root,item))
+        h,w=P_HW(xyzl)
+        print(h,w)
+        width.append(w)
+        leng.append(h)
+    wb = openpyxl.Workbook()
+    sheet = wb.active
+    data=[name,leng,width]
+    id=1
+    for item in range(len(data)):
+        index = id + item
+        for i in range(len(data[item])):
+            sheet.cell(row=i + 1, column=index, value=data[item][i])
+    print(name)
+    wb.save('株高株幅预测.xlsx')
 
-
-
-
-
-import openpyxl
-
-wb = openpyxl.Workbook()
-sheet = wb.active
-data=[name,leng,width]
-id=1
-for item in range(len(data)):
-    index = id + item
-    for i in range(len(data[item])):
-        sheet.cell(row=i + 1, column=index, value=data[item][i])
-print(name)
-wb.save('株高株幅预测.xlsx')
+if __name__=='__main__':
+    main()

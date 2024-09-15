@@ -4,7 +4,9 @@ from shapely.geometry import Polygon
 import open3d as o3d
 
 import matplotlib.pyplot as plt
-
+from sklearn.decomposition import PCA
+import openpyxl
+import os
 def PA(data):
     xyzl=data
     data = xyzl[xyzl[:, -2] == 2]
@@ -92,35 +94,34 @@ def detect_outliers2(df):
 
     return d
 
-from sklearn.decomposition import PCA
+def main():
+    num_b=1
+    data_root = 'D:\datains\论文data\分割结果\End2End白盆'
+    a = []
+    name = ['id']
+    for item in os.listdir(data_root):
+        area = []
+        area.append(item)
+        xyzl = np.loadtxt(os.path.join(data_root,item))
+        pa=PA(xyzl)
+        a.append(pa)
+        print(a)
 
-num_b=1
-
-import openpyxl
-import os
-data_root = 'D:\datains\论文data\分割结果\End2End白盆'
-a = []
-name = ['id']
-for item in os.listdir(data_root):
-    area = []
-    area.append(item)
-    xyzl = np.loadtxt(os.path.join(data_root,item))
-    pa=PA(xyzl)
-    a.append(pa)
-    print(a)
-import openpyxl
-wb = openpyxl.Workbook()
-sheet = wb.active
+    wb = openpyxl.Workbook()
+    sheet = wb.active
 
 
-data=a
+    data=a
 
-id = 1
-for item in range(len(data)):
-    index = id + item
-    for i in range(len(data[item])):
-        sheet.cell(row=i + 1, column=index, value=data[item][i])
+    id = 1
+    for item in range(len(data)):
+        index = id + item
+        for i in range(len(data[item])):
+            sheet.cell(row=i + 1, column=index, value=data[item][i])
 
 
-wb.save('End2End叶片面积预测.xlsx')
+    wb.save('End2End叶片面积预测.xlsx')
+
+if __name__=='__mian()__':
+    main()
 

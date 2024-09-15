@@ -3,7 +3,7 @@ import math
 import numpy as np
 import open3d as o3d
 import heapq
-
+import openpyxl
 
 def detect_outliers2(df):
     outlier_indices = []
@@ -103,30 +103,33 @@ for itemy in os.listdir(data_r):
 
 
 
-import openpyxl
-wb = openpyxl.Workbook()
-sheet = wb.active
-data1=lenth
-id=1
-for item in range(len(data1)):
-    index = id + item
-    for i in range(len(data1[item])):
-        sheet.cell(row=i + 1, column=index, value=data1[item][i])
+def main():
+    wb = openpyxl.Workbook()
+    sheet = wb.active
+    data1=lenth
+    id=1
+    for item in range(len(data1)):
+        index = id + item
+        for i in range(len(data1[item])):
+            sheet.cell(row=i + 1, column=index, value=data1[item][i])
 
 
-wb.save('End2End叶长.xlsx')
+    wb.save('End2End叶长.xlsx')
 
-wb1 = openpyxl.Workbook()
-sheet = wb1.active
-data=width
-id=1
-for item in range(len(data)):
-    index = id + item
-    for i in range(len(data[item])):
-        sheet.cell(row=i + 1, column=index, value=data[item][i])
+    wb1 = openpyxl.Workbook()
+    sheet = wb1.active
+    data=width
+    id=1
+    for item in range(len(data)):
+        index = id + item
+        for i in range(len(data[item])):
+            sheet.cell(row=i + 1, column=index, value=data[item][i])
 
 
-wb1.save('End2End叶宽.xlsx')
+    wb1.save('End2End叶宽.xlsx')
+
+if __name__=='__main__':
+    main()
 
 
 

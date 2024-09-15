@@ -1,7 +1,7 @@
 import numpy as np
 from sklearn.decomposition import PCA
 import os
-
+import openpyxl
 
 def LAG(data):
     '''
@@ -41,29 +41,32 @@ def LAG(data):
     sun_a = sum(a)
     a1 = sun_a / len(a)
     return a1
+def main():
+    name=['ID']
+    avg=['叶片角度']
+    data_root='F:\/240823_n40_data_train_val_test_result\普通手动真值'
+    for item in os.listdir(data_root):
+        a=[]
+        name.append(item)
+        print(os.path.join(data_root,item))
+        xtzl=np.loadtxt(os.path.join(data_root,item))
+        a1=LAG(xtzl)
+        avg.append(a1)
 
-name=['ID']
-avg=['叶片角度']
-data_root='F:\/240823_n40_data_train_val_test_result\普通手动真值'
-for item in os.listdir(data_root):
-    a=[]
-    name.append(item)
-    print(os.path.join(data_root,item))
-    xtzl=np.loadtxt(os.path.join(data_root,item))
-    a1=LAG(xtzl)
-    avg.append(a1)
 
-import openpyxl
 
-wb = openpyxl.Workbook()
-sheet = wb.active
-data = [name, avg]
-id = 1
-for item in range(len(data)):
-    index = id + item
-    for i in range(len(data[item])):
-        sheet.cell(row=i + 1, column=index, value=data[item][i])
-wb.save('叶片角度预测.xlsx')
+    wb = openpyxl.Workbook()
+    sheet = wb.active
+    data = [name, avg]
+    id = 1
+    for item in range(len(data)):
+        index = id + item
+        for i in range(len(data[item])):
+            sheet.cell(row=i + 1, column=index, value=data[item][i])
+    wb.save('叶片角度预测.xlsx')
+
+if __name__=='__main()__':
+    main()
 
 
 

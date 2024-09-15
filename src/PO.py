@@ -2,6 +2,7 @@ import numpy as np
 import os
 import open3d as o3d
 import math
+import openpyxl
 
 def PO (data):
     '''
@@ -133,34 +134,37 @@ def max_euclidean_distance(base_point, points):
     avg_distance = np.mean(distances)
 
     return avg_distance
+def main():
+    a=['PO']
+    name=['id']
 
-a=['PO']
-name=['id']
+    # dataj_root="D:\py\j\/result"
+    data_root="F:\/240823_n40_data_train_val_test_result\普通手动真值"
+    for item in os.listdir(data_root):
+        ar=[]
+        ar2=[]
+        name.append(item)
+        max1 = 10000
+        arg=0
+        xyzl1=np.loadtxt(os.path.join(data_root,item))
+        m=PO(xyzl1)
+        a.append(m/180)
+        print(a)
 
-# dataj_root="D:\py\j\/result"
-data_root="F:\/240823_n40_data_train_val_test_result\普通手动真值"
-for item in os.listdir(data_root):
-    ar=[]
-    ar2=[]
-    name.append(item)
-    max1 = 10000
-    arg=0
-    xyzl1=np.loadtxt(os.path.join(data_root,item))
-    m=PO(xyzl1)
-    a.append(m/180)
-    print(a)
 
-import openpyxl
-wb = openpyxl.Workbook()
-sheet = wb.active
-sheet.title = 'Z3'
-data=[name,a]
-id=1
-for item in range(len(data)):
-    index = id + item
-    for i in range(len(data[item])):
-        sheet.cell(row=i + 1, column=index, value=data[item][i])
-wb.save('扩展度预测.xlsx')
+    wb = openpyxl.Workbook()
+    sheet = wb.active
+    sheet.title = 'Z3'
+    data=[name,a]
+    id=1
+    for item in range(len(data)):
+        index = id + item
+        for i in range(len(data[item])):
+            sheet.cell(row=i + 1, column=index, value=data[item][i])
+    wb.save('扩展度预测.xlsx')
+
+if __name__=='__mian__':
+    main()
 
 
 

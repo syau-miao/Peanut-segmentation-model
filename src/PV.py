@@ -1,6 +1,7 @@
 import open3d as o3d
 import numpy as np
-
+import openpyxl
+import os
 
 def volume_Voxel(data,step=0.2):
     '''
@@ -35,47 +36,36 @@ def volume_Voxel(data,step=0.2):
     return V
 
 
-import tkinter as tk
 
-from tkinter import filedialog
-import os
+def main():
+    data_root = "F:\/240823_n40_data_train_val_test_result\普通手动真值"
+    v=['体积']
+    name=['ID']
+    for item in os.listdir(data_root):
+        xyzl=np.loadtxt(os.path.join(data_root,item))
+        xyzl=xyzl[xyzl[:,-2]!=1]
+        name.append(item)
+        points = []
+        pcd=o3d.geometry.PointCloud()
+        pcd.points=o3d.utility.Vector3dVector(xyzl[:,:3])
+        print(pcd)
+        step = 1
+        pcd_cloud = np.array(pcd.points)
+        V=volume_Voxel(pcd_cloud,step)
+        print(V)
+        v.append(V)
+    wb = openpyxl.Workbook()
+    sheet = wb.active
+    data = [name, v]
+    id = 1
+    for item in range(len(data)):
+        index = id + item
+        for i in range(len(data[item])):
+            sheet.cell(row=i + 1, column=index, value=data[item][i])
+    wb.save('体积预测.xlsx')
 
-import openpyxl
-
-data_root = "F:\/240823_n40_data_train_val_test_result\普通手动真值"
-v=['体积']
-name=['ID']
-for item in os.listdir(data_root):
-    xyzl=np.loadtxt(os.path.join(data_root,item))
-    xyzl=xyzl[xyzl[:,-2]!=1]
-    name.append(item)
-    points = []
-    pcd=o3d.geometry.PointCloud()
-    pcd.points=o3d.utility.Vector3dVector(xyzl[:,:3])
-    print(pcd)
-    step = 1
-    pcd_cloud = np.array(pcd.points)
-    V=volume_Voxel(pcd_cloud,step)
-    print(V)
-    v.append(V)
-
-
-
-import openpyxl
-
-wb = openpyxl.Workbook()
-sheet = wb.active
-
-data = [name, v]
-
-id = 1
-for item in range(len(data)):
-    index = id + item
-    for i in range(len(data[item])):
-        sheet.cell(row=i + 1, column=index, value=data[item][i])
-
-
-wb.save('体积预测.xlsx')
+if __name__=='__main__':
+    main()
 
 
 

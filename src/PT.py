@@ -8,9 +8,9 @@ import math
 import matplotlib.pyplot as plt
 import copy
 from sklearn.cluster import KMeans
+import openpyxl
 
 
-sumage=0
 
 
 def max_euclidean_distance(base_point, points):
@@ -262,12 +262,8 @@ def PT(data_root,item,data,bandwidth=0):
     print(a)
     return a
 
-import tkinter as tk
-
-from tkinter import filedialog
-if __name__=='__main__':
-    import openpyxl
-
+def main():
+    sumage = 0
     data_root = 'F:\/240823_n40_data_train_val_test_result\普通手动真值'
     a = ['透光率']
     name = ['id']
@@ -289,5 +285,8 @@ if __name__=='__main__':
         for i in range(len(data[item])):
             sheet.cell(row=i + 1, column=index, value=data[item][i])
     wb.save('透光率.xlsx')
+if __name__=='__main__':
+    main()
+
 
 

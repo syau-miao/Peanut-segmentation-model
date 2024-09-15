@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Polygon
 import matplotlib.tri as tri
 import tkinter as tk
-
+import openpyxl
 from tkinter import filedialog
 
 
@@ -57,9 +57,7 @@ def PA(data,step=0.10):
     return area
 
 
-
-if __name__=='__main__':
-    import openpyxl
+def main():
     data_root="F:\/240823_n40_data_train_val_test_result\普通手动真值"
     a=['投影面积']
     name=['ID']
@@ -78,7 +76,10 @@ if __name__=='__main__':
         for i in range(len(data[item])):
             sheet.cell(row=i + 1, column=index, value=data[item][i])
 
-    wb.save('草莓投影面积预测.xlsx')
+    wb.save('投影面积预测.xlsx')
 
 
 
+
+if __name__=='__main__':
+    main()

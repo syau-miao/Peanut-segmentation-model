@@ -2,6 +2,7 @@ import numpy as np
 import os
 import open3d as o3d
 import math
+import openpyxl
 
 def PU(data):
     '''
@@ -142,34 +143,31 @@ def max_euclidean_distance(base_point, points):
 
     return avg_distance
 
+def main():
+    a=['直立度']
+    name=['id']
+    data_root='F:\/240823_n40_data_train_val_test_result\普通手动真值'
+    for item in os.listdir(data_root):
+        ar=[]
+        ar2=[]
+        name.append(item)
+        max = 10000
+        arg=0
+        xyzl1=np.loadtxt(os.path.join(data_root,item))
+        pu=PU(xyzl1)
+        a.append(pu)
+        print(a)
+    wb = openpyxl.Workbook()
+    sheet = wb.active
+    data=[name,a]
+    id=1
+    for item in range(len(data)):
+        index = id + item
+        for i in range(len(data[item])):
+            sheet.cell(row=i + 1, column=index, value=data[item][i])
+    wb.save('直立度预测.xlsx')
 
-a=['直立度']
-name=['id']
-
-data_root='F:\/240823_n40_data_train_val_test_result\普通手动真值'
-for item in os.listdir(data_root):
-    ar=[]
-    ar2=[]
-    name.append(item)
-    max = 10000
-    arg=0
-    xyzl1=np.loadtxt(os.path.join(data_root,item))
-    pu=PU(xyzl1)
-    a.append(pu)
-    print(a)
-
-
-
-import openpyxl
-wb = openpyxl.Workbook()
-sheet = wb.active
-data=[name,a]
-id=1
-for item in range(len(data)):
-    index = id + item
-    for i in range(len(data[item])):
-        sheet.cell(row=i + 1, column=index, value=data[item][i])
-wb.save('直立度预测.xlsx')
-
+if __name__=='__main__':
+    main()
 
 
