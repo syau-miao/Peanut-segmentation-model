@@ -92,21 +92,42 @@ python tools/test.py --config-file configs/huasheng3d/insseg-pointgroup-v3m1-0-p
 
 ## 3D Phenotype Measurement
 
-- PH_PW :Calculate the plant height and spread and save it as an Excel table.
-- PA :Calculate the projected area of the plant and save it as an Excel table.
-- PV :Calculate the plant volume and save it as an Execl table.
-- PO :Calculate the plant spread of the plant and save it as an Execl table.
-- PU :Calculate the upright degree of the plantand save it as an Execl table.
-- PT :Calculate the light transmittance of the plant and save it as an Execl table.
-- LL_LW :Calculate the leaf length and width of the plant and save it as an Execl table.
-- LA :Calculate the leaf area of the plant and save it as an Execl table.
-- LAG :Calculate the plant leaf Angle and save it as an Execl table.
-- Tag_merge :It is used for merging semantic and instance tags and data.
-
 ```bash
-#11111
-#
+#For label merging and phenotype acquisition of segmented data.
+#Change the address in data_root when it is used.
+
+#Environmental installation
+conda install scipy,shapely,open3d,matplotlib,openpyxl,scikit-learn,numpy
+
+#Calculate the plant height and spread and save it as an Excel table.
+python src/PH_PW.py 
+
+#Calculate the projected area of the plant and save it as an Excel table.
+python src/PA.py 
+
+#Calculate the plant volume and save it as an Execl table.
+python src/PV.py 
+
+#Calculate the plant spread of the plant and save it as an Execl table.
+python src/PO.py 
+
+#Calculate the upright degree of the plantand save it as an Execl table.
+python src/PU.py 
+
+#Calculate the light transmittance of the plant and save it as an Execl table.
+python src/PT.py 
+
+#Calculate the leaf length and width of the plant and save it as an Execl table.
+python src/LL_LW.py 
+
+#Calculate the leaf area of the plant and save it as an Execl table.
 python src/LA.py 
+
+#Calculate the plant leaf Angle and save it as an Execl table.
+python src/LAG.py 
+
+#It is used for merging semantic and instance tags and data.
+python src/Tag_merge.py
 ```
 
 # Reference
