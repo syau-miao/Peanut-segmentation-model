@@ -56,7 +56,7 @@ pip install flash-attn --no-build-isolation
 
 
 ### Dataset
-Our model data is here: https://www.kaggle.com/datasets/yangxin6/peanut-point-cloud/
+https://www.kaggle.com/datasets/zhangb6/peanut-dataset/data
 
 training and validation datasets into the `data/huasheng3d/` folder, and modify the corresponding `configs/*` file
 
