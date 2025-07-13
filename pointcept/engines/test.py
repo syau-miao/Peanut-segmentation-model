@@ -1999,15 +1999,15 @@ class InstanceSegTester(TesterBase):
             pred_center, center_radius = self.evaluate_bias(best_output['bias_pred'].cpu().numpy(), coord, instance)
 
             # 保存每个分割的结果
-            pred_data = np.ones((coord.shape[0], 10)) * -1
+            pred_data = np.ones((coord.shape[0], 5)) * -1
             pred_data[:, :3] = coord
-            pred_data[:, 3:6] = pred_center
-            pred_data[:, 6] = center_radius
-            pred_data[:, 9] = instance
+            #pred_data[:, 3:6] = pred_center
+            #pred_data[:, 6] = center_radius
+            #pred_data[:, 9] = instance
             for instance_id, mask in enumerate(best_output['pred_masks']):
                 semantic_class = best_output['pred_classes'][instance_id].item()
-                pred_data[mask == 1, 7] = semantic_class
-                pred_data[mask == 1, 8] = instance_id  # 实例ID从0开始
+                pred_data[mask == 1, 3] = semantic_class
+                pred_data[mask == 1, 4] = instance_id  # 实例ID从0开始
             pred_save_path = os.path.join(save_path, f"{data_name}_pred.txt")
             np.savetxt(pred_save_path, pred_data)
             # if infer:
