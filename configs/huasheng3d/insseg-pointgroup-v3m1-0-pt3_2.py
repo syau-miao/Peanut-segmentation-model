@@ -16,7 +16,7 @@ class_names = [
 num_classes = 3
 segment_ignore_index = [-1]
 instance_ignore_index = -1
-instance_segment_ignore_index = [-1, 0, 1]
+instance_segment_ignore_index = [-1]
 # model settings
 model = dict(
     type="PG-v3m1",
