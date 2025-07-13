@@ -243,5 +243,5 @@ hooks = [
     ),
     dict(type="CheckpointSaver", save_freq=None),
 ]
-# test = dict(type="InstanceSegTester", verbose=True)
-test = dict(type="SemSegTester", verbose=True)
+test = dict(type="InstanceSegTester", verbose=True)
+# test = dict(type="SemSegTester", verbose=True)
